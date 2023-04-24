@@ -1,3 +1,7 @@
+
+"@uniswap/sdk": "3.0.3-beta.1",
+"@uniswap/sdk": "file:../SwapV2-sdk",
+
 # Uniswap Interface
 
 [![Tests](https://github.com/Uniswap/uniswap-interface/workflows/Tests/badge.svg)](https://github.com/Uniswap/uniswap-interface/actions?query=workflow%3ATests)
