@@ -1,6 +1,7 @@
 
 "@uniswap/sdk": "3.0.3-beta.1",
 "@uniswap/sdk": "file:../SwapV2-sdk",
+"@uniswap/sdk": "npm:mxcswap-sdk",
 
 # Uniswap Interface
 
