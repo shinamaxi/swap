@@ -2574,8 +2574,10 @@
   resolved "https://registry.yarnpkg.com/@uniswap/lib/-/lib-1.1.1.tgz#0afd29601846c16e5d082866cbb24a9e0758e6bc"
   integrity sha512-2yK7sLpKIT91TiS5sewHtOa7YuM8IuBXVl4GZv2jZFys4D2sY7K5vZh6MqD25TPA95Od+0YzCVq6cTF2IKrOmg==
 
-"@uniswap/sdk@file:../SwapV2-sdk":
+"@uniswap/sdk@npm:@wannseeswap/mxcswap-sdk":
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@wannseeswap/mxcswap-sdk/-/mxcswap-sdk-1.0.0.tgz#42b8e886b8f2c46f1e065d6c1a584041f4b098e0"
+  integrity sha512-wyv4XA9/wbmtI/0jZGWXJdZq4IYViobJZRVJ/XTGHVtULd6vadE+kPcUc8rAd4p8KubElQ56ZB+ftkN55unNvA==
   dependencies:
     "@uniswap/v2-core" "^1.0.0"
     big.js "^5.2.2"
