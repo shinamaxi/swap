@@ -7,7 +7,7 @@ import styled from 'styled-components'
 
 // import Logo from '../../assets/svg/logo.png'
 // import LogoDark from '../../assets/svg/logo.png'
-import Wordmark from '../../assets/svg/wordmark_white.svg'
+import Wordmark from '../../assets/svg/wordmark.svg'
 import WordmarkDark from '../../assets/svg/wordmark_white.svg'
 import { useActiveWeb3React } from '../../hooks'
 import { useDarkModeManager } from '../../state/user/hooks'
@@ -19,7 +19,7 @@ import Menu from '../Menu'
 
 import Row, { RowBetween } from '../Row'
 import Web3Status from '../Web3Status'
-// import VersionSwitch from './VersionSwitch'  
+// import VersionSwitch from './VersionSwitch'
 
 const HeaderFrame = styled.div`
   display: flex;
@@ -150,7 +150,11 @@ export default function Header() {
               <img src={isDark ? LogoDark : Logo} alt="logo" />
             </UniIcon> */}
             <TitleText>
-              <img style={{ marginLeft: '4px', marginTop: '4px' }} src={isDark ? WordmarkDark : Wordmark} alt="logo" />
+              <img
+                style={{ marginLeft: '4px', marginTop: '4px', width: '20%' }}
+                src={isDark ? WordmarkDark : Wordmark}
+                alt="logo"
+              />
             </TitleText>
           </Title>
         </HeaderElement>
