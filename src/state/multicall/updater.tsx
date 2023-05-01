@@ -15,6 +15,7 @@ import {
   parseCallKey,
   updateMulticallResults
 } from './actions'
+import { V1_FACTORY_ADDRESSES } from '../../constants/v1'
 
 // chunk calls so we do not exceed the gas limit
 const CALL_CHUNK_SIZE = 500
@@ -28,10 +29,17 @@ const CALL_CHUNK_SIZE = 500
 async function fetchChunk(
   multicallContract: Contract,
   chunk: Call[],
-  minBlockNumber: number
+  minBlockNumber: number,
+  chainId: number
 ): Promise<{ results: string[]; blockNumber: number }> {
-  console.debug('Fetching chunk', multicallContract, chunk, minBlockNumber)
+  // console.debug('Fetching chunk', multicallContract, chunk, minBlockNumber)
   let resultsBlockNumber, returnData
+
+  chunk = chunk.filter(
+    // not factory && transform
+    // @ts-ignore
+    item => item.address !== V1_FACTORY_ADDRESSES[chainId] && item.callData.slice(0, 10) !== '0x06f2bf62'
+  )
   try {
     ;[resultsBlockNumber, returnData] = await multicallContract.aggregate(chunk.map(obj => [obj.address, obj.callData]))
   } catch (error) {
@@ -156,7 +164,7 @@ export default function Updater(): null {
     cancellations.current = {
       blockNumber: latestBlockNumber,
       cancellations: chunkedCalls.map((chunk, index) => {
-        const { cancel, promise } = retry(() => fetchChunk(multicallContract, chunk, latestBlockNumber), {
+        const { cancel, promise } = retry(() => fetchChunk(multicallContract, chunk, latestBlockNumber, chainId), {
           n: Infinity,
           minWait: 2500,
           maxWait: 3500
@@ -187,7 +195,8 @@ export default function Updater(): null {
               console.debug('Cancelled fetch for blockNumber', latestBlockNumber)
               return
             }
-            console.error('Failed to fetch multicall chunk', chunk, chainId, error)
+            // console.error('Failed to fetch multicall chunk', chunk, chainId, error)
+            console.log(chunk, 'chunk')
             dispatch(
               errorFetchingMulticallResults({
                 calls: chunk,
