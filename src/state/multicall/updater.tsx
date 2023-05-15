@@ -15,7 +15,7 @@ import {
   parseCallKey,
   updateMulticallResults
 } from './actions'
-import { V1_FACTORY_ADDRESSES } from '../../constants/v1'
+// import { V1_FACTORY_ADDRESSES } from '../../constants/v1'
 
 // chunk calls so we do not exceed the gas limit
 const CALL_CHUNK_SIZE = 500
@@ -35,11 +35,11 @@ async function fetchChunk(
   // console.debug('Fetching chunk', multicallContract, chunk, minBlockNumber)
   let resultsBlockNumber, returnData
 
-  chunk = chunk.filter(
-    // not factory && transform
-    // @ts-ignore
-    item => item.address !== V1_FACTORY_ADDRESSES[chainId] && item.callData.slice(0, 10) !== '0x06f2bf62'
-  )
+  // chunk = chunk.filter(
+  //   // not factory && transform
+  //   // @ts-ignore
+  //   item => item.address !== V1_FACTORY_ADDRESSES[chainId] && item.callData.slice(0, 10) !== '0x06f2bf62'
+  // )
   try {
     ;[resultsBlockNumber, returnData] = await multicallContract.aggregate(chunk.map(obj => [obj.address, obj.callData]))
   } catch (error) {

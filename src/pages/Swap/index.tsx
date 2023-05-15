@@ -21,7 +21,7 @@ import TokenWarningModal from '../../components/TokenWarningModal'
 import ProgressSteps from '../../components/ProgressSteps'
 
 import { BETTER_TRADE_LINK_THRESHOLD, INITIAL_ALLOWED_SLIPPAGE } from '../../constants'
-import { getTradeVersion, isTradeBetter } from '../../data/V1'
+import { getTradeVersion, isTradeBetter, useV1Trade } from '../../data/V1'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
 import { ApprovalState, useApproveCallbackFromTrade } from '../../hooks/useApproveCallback'
@@ -78,14 +78,7 @@ export default function Swap() {
 
   // swap state
   const { independentField, typedValue, recipient } = useSwapState()
-  const {
-    v1Trade,
-    v2Trade,
-    currencyBalances,
-    parsedAmount,
-    currencies,
-    inputError: swapInputError
-  } = useDerivedSwapInfo()
+  const { v2Trade, currencyBalances, parsedAmount, currencies, inputError: swapInputError } = useDerivedSwapInfo()
   const { wrapType, execute: onWrap, inputError: wrapInputError } = useWrapCallback(
     currencies[Field.INPUT],
     currencies[Field.OUTPUT],
@@ -97,10 +90,10 @@ export default function Swap() {
   const trade = showWrap
     ? undefined
     : {
-        [Version.v1]: v1Trade,
+        [Version.v1]: undefined,
         [Version.v2]: v2Trade
       }[toggledVersion]
-
+  const v1Trade = useV1Trade(undefined)
   const betterTradeLinkVersion: Version | undefined =
     toggledVersion === Version.v2 && isTradeBetter(v2Trade, v1Trade, BETTER_TRADE_LINK_THRESHOLD)
       ? Version.v1
@@ -387,7 +380,7 @@ export default function Swap() {
                 {wrapInputError ??
                   (wrapType === WrapType.WRAP ? 'Wrap' : wrapType === WrapType.UNWRAP ? 'Unwrap' : null)}
               </ButtonPrimary>
-            ) : noRoute && userHasSpecifiedInputOutput ? (
+            ) : noRoute && userHasSpecifiedInputOutput && swapInputError === undefined ? (
               <GreyCard style={{ textAlign: 'center' }}>
                 <TYPE.main mb="4px">Insufficient liquidity for this trade.</TYPE.main>
               </GreyCard>
