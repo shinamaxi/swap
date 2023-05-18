@@ -44,6 +44,7 @@ import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody'
 import { ClickableText } from '../Pool/styleds'
 import Loader from '../../components/Loader'
+import { FloatingActionButton } from '../../components/Fab'
 
 export default function Swap() {
   const loadedUrlParams = useDefaultsFromURLSearch()
@@ -262,6 +263,10 @@ export default function Swap() {
   const handleOutputSelect = useCallback(outputCurrency => onCurrencySelection(Field.OUTPUT, outputCurrency), [
     onCurrencySelection
   ])
+  const [showMessage, setShowMessage] = useState<boolean>(false)
+  const changeShowMessage = () => {
+    setShowMessage(!showMessage)
+  }
 
   return (
     <>
@@ -270,6 +275,7 @@ export default function Swap() {
         tokens={urlLoadedTokens}
         onConfirm={handleConfirmTokenWarning}
       />
+      <FloatingActionButton changeShowMessage={changeShowMessage} showMessage={showMessage} />
       <AppBody>
         <SwapPoolTabs active={'swap'} />
         <Wrapper id="swap-page">
