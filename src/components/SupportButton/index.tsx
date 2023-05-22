@@ -1,15 +1,10 @@
-import React, { ButtonHTMLAttributes } from 'react'
+import React, { ButtonHTMLAttributes, useState } from 'react'
 import styled from 'styled-components'
-import { Color } from '../../theme/styled'
 
-type StyledButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  showMessage?: boolean
-}
+const showMessageBackgroundColor = '#1568E5'
+const smallButtonBackgroundColor = '#FD3944'
 
-const bg1: Color = '#1568E5'
-const bg2: Color = '#FD3944'
-
-const StyledButton = styled.button<StyledButtonProps>`
+const StyledButton = styled.button<ButtonHTMLAttributes<HTMLButtonElement> & { showMessage?: boolean }>`
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -20,7 +15,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   font-size: ${({ showMessage }) => (showMessage ? '18px' : '14px')};
   font-family: 'Inter', sans-serif;
   border-style: none;
-  background-color: ${({ theme, showMessage }) => (showMessage ? bg1 : bg2)};
+  background-color: ${({ showMessage }) => (showMessage ? showMessageBackgroundColor : smallButtonBackgroundColor)};
   color: white;
   border-radius: ${({ showMessage }) => (showMessage ? '25px' : '50%')};
   min-width: ${({ showMessage }) => (showMessage ? '140px' : '25px')};
@@ -35,30 +30,27 @@ const StyledButton = styled.button<StyledButtonProps>`
     margin-top: -8px;
     border-style: solid;
     border-width: 14px 0 0px 24px;
-    border-color: transparent transparent transparent ${({ theme, showMessage }) => (showMessage ? bg1 : bg2)};
+    border-color: transparent transparent transparent
+      ${({ showMessage }) => (showMessage ? showMessageBackgroundColor : smallButtonBackgroundColor)};
     visibility: ${({ showMessage }) => (showMessage ? 'visible' : 'hidden')};
   }
 `
 
-export function FloatingActionButton({
-  changeShowMessage,
-  showMessage
-}: {
-  changeShowMessage: Function
-  showMessage: boolean
-}) {
+export function SupportButton() {
+  const [state, setState] = useState(false)
+
   const handleClick = () => {
-    if (showMessage) {
+    if (state) {
       const newWindow = window.open('https://t.me/mxcchatgpt_bot')
       if (newWindow) newWindow.opener = null
     } else {
-      changeShowMessage(!showMessage)
+      setState(!state)
     }
   }
 
   return (
-    <StyledButton showMessage={showMessage} onClick={handleClick}>
-      <span>{showMessage ? 'Need help ?' : '1'}</span>
+    <StyledButton showMessage={state} onClick={handleClick}>
+      <span>{state ? 'Need help ?' : '1'}</span>
     </StyledButton>
   )
 }
