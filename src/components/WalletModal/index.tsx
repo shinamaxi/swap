@@ -11,6 +11,7 @@ import AccountDetails from '../AccountDetails'
 import PendingView from './PendingView'
 import Option from './Option'
 import { SUPPORTED_WALLETS } from '../../constants'
+import { ButtonPrimary } from '../Button'
 import { ExternalLink } from '../../theme'
 import MetamaskIcon from '../../assets/images/metamask.png'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
@@ -287,6 +288,44 @@ export default function WalletModal({
     })
   }
 
+  const switchChain = async () => {
+    if (window.ethereum) {
+      try {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [
+            {
+              chainId: '0x4ed79b'
+            }
+          ]
+        })
+      } catch (error) {
+        console.error(error)
+      }
+    }
+  }
+
+  const addChain = async () => {
+    if (window.ethereum) {
+      await window.ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          {
+            chainId: '0x4ed79b',
+            rpcUrls: ['https://wannsee-rpc.mxc.com/'],
+            chainName: 'wannsee',
+            nativeCurrency: {
+              name: 'MXC',
+              symbol: 'MXC',
+              decimals: 18
+            },
+            blockExplorerUrls: ['https://wannsee-explorer.mxc.com/']
+          }
+        ]
+      })
+    }
+  }
+
   function getModalContent() {
     if (error) {
       return (
@@ -297,7 +336,16 @@ export default function WalletModal({
           <HeaderRow>{error instanceof UnsupportedChainIdError ? 'Wrong Network' : 'Error connecting'}</HeaderRow>
           <ContentWrapper>
             {error instanceof UnsupportedChainIdError ? (
-              <h5>Please connect to the appropriate Ethereum network.</h5>
+              // <h5>Please connect to the appropriate Ethereum network.</h5>
+              <>
+                <h5>Please connect to the appropriate Wannsee network.</h5>
+                <ButtonPrimary onClick={switchChain} style={{ marginBottom: '10px' }}>
+                  Switch MXC Network
+                </ButtonPrimary>
+                <ButtonPrimary onClick={addChain} className="btns">
+                  Add MXC Network
+                </ButtonPrimary>
+              </>
             ) : (
               'Error connecting. Try refreshing the page.'
             )}
