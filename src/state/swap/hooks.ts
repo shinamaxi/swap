@@ -162,7 +162,13 @@ export function useDerivedSwapInfo(): {
     inputError = inputError ?? 'Select a token'
   }
 
-  if (currencies[Field.INPUT] && currencies[Field.OUTPUT] && parsedAmount && bestTradeExactIn === null) {
+  if (
+    currencies[Field.INPUT] &&
+    currencies[Field.OUTPUT] &&
+    parsedAmount &&
+    bestTradeExactIn === null &&
+    bestTradeExactOut === null
+  ) {
     inputError = inputError ?? 'Loading...'
   }
 
