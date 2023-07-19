@@ -20,6 +20,11 @@ import { OVERLAY_READY } from '../../connectors/Fortmatic'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
+const chainName = process.env.REACT_APP_CHAIN_NAME || ''
+const chainIDHex = process.env.REACT_APP_CHAIN_ID_HEX || ''
+const chainRPC = process.env.REACT_APP_NETWORK_URL || ''
+const explorer = process.env.REACT_APP_CHAIN_EXPLORER || ''
+
 const CloseIcon = styled.div`
   position: absolute;
   right: 1rem;
@@ -295,7 +300,7 @@ export default function WalletModal({
           method: 'wallet_switchEthereumChain',
           params: [
             {
-              chainId: '0x4ed79b'
+              chainId: chainIDHex
             }
           ]
         })
@@ -311,15 +316,15 @@ export default function WalletModal({
         method: 'wallet_addEthereumChain',
         params: [
           {
-            chainId: '0x4ed79b',
-            rpcUrls: ['https://wannsee-rpc.mxc.com/'],
-            chainName: 'wannsee',
+            chainId: chainIDHex,
+            rpcUrls: [chainRPC],
+            chainName,
             nativeCurrency: {
               name: 'MXC',
               symbol: 'MXC',
               decimals: 18
             },
-            blockExplorerUrls: ['https://wannsee-explorer.mxc.com/']
+            blockExplorerUrls: [explorer]
           }
         ]
       })
@@ -338,12 +343,12 @@ export default function WalletModal({
             {error instanceof UnsupportedChainIdError ? (
               // <h5>Please connect to the appropriate Ethereum network.</h5>
               <>
-                <h5>Please connect to the appropriate Wannsee network.</h5>
+                <h5>Please connect to the appropriate {chainName} network.</h5>
                 <ButtonPrimary onClick={switchChain} style={{ marginBottom: '10px' }}>
-                  Switch MXC Network
+                  Switch {chainName} Network
                 </ButtonPrimary>
                 <ButtonPrimary onClick={addChain} className="btns">
-                  Add MXC Network
+                  Add {chainName} Network
                 </ButtonPrimary>
               </>
             ) : (

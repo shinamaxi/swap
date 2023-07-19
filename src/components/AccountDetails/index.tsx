@@ -21,6 +21,7 @@ import Identicon from '../Identicon'
 import { ButtonSecondary } from '../Button'
 import { ExternalLink as LinkIcon } from 'react-feather'
 import { ExternalLink, LinkStyledButton, TYPE } from '../../theme'
+const chainName = process.env.REACT_APP_CHAIN_NAME
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
@@ -358,7 +359,7 @@ export default function AccountDetails({
                             href={chainId && getEtherscanLink(chainId, ENSName, 'address')}
                           >
                             <LinkIcon size={16} />
-                            <span style={{ marginLeft: '4px' }}>View on Wannsee Explorer</span>
+                            <span style={{ marginLeft: '4px' }}>View on {chainName} Explorer</span>
                           </AddressLink>
                         )}
                       </div>
@@ -380,7 +381,7 @@ export default function AccountDetails({
                             href={getEtherscanLink(chainId, account, 'address')}
                           >
                             <LinkIcon size={16} />
-                            <span style={{ marginLeft: '4px' }}>View on Wannsee Explorer</span>
+                            <span style={{ marginLeft: '4px' }}>View on {chainName} Explorer</span>
                           </AddressLink>
                         )}
                       </div>

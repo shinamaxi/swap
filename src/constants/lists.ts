@@ -1,7 +1,8 @@
 // the Uniswap Default token list lives here
 // export const DEFAULT_TOKEN_LIST_URL = 'tokens.uniswap.eth'
 export const DEFAULT_TOKEN_LIST_URL =
-  'https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist.json?version=7'
+  'https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist-mainnet.json?version=1'
+// 'https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist.json?version=7'
 // https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json
 
 // export const DEFAULT_LIST_OF_LISTS: string[] = [
