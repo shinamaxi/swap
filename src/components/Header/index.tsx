@@ -128,13 +128,13 @@ const BalanceText = styled(Text)`
 
 const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
   [ChainId.MAINNET]: null,
-  [ChainId.RINKEBY]: 'Rinkeby',
-  [ChainId.ROPSTEN]: 'Ropsten',
-  [ChainId.GÖRLI]: 'Görli',
-  [ChainId.KOVAN]: 'Kovan',
+  // [ChainId.RINKEBY]: 'Rinkeby',
+  // [ChainId.ROPSTEN]: 'Ropsten',
+  // [ChainId.GÖRLI]: 'Görli',
+  // [ChainId.KOVAN]: 'Kovan',
+  // [ChainId.GANACHE]: 'Ganache',
   [ChainId.WANNSEE]: 'Wannsee',
   [ChainId.WANNSEEMAINNET]: 'zkEVM Mainnet',
-  [ChainId.GANACHE]: 'Ganache',
   [ChainId.HARDHAT]: 'Hardhat'
 }
 

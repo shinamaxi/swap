@@ -3,12 +3,16 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { fortmatic, injected, portis, walletconnect, walletlink } from '../connectors'
 
-// wannsee
-// export const ROUTER_ADDRESS = '0xCaf6FE52B3b2948EFe7EA72C1ffd0B49C5FB030E'
-// hardhat
-// export const ROUTER_ADDRESS = '0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9'
-// wannsee-mainnet
-export const ROUTER_ADDRESS = '0x757e5af94fC9b3d4035C2e6Cb1fD304F43c0A1A4'
+const NETWORK_CHAIN_ID: ChainId = process.env.REACT_APP_CHAIN_ID ? parseInt(process.env.REACT_APP_CHAIN_ID) : ChainId.WANNSEEMAINNET
+
+const Router_MAP: { [key in ChainId]: string } = {
+  [ChainId.MAINNET]: "0x",
+  [ChainId.WANNSEE]: '0xCaf6FE52B3b2948EFe7EA72C1ffd0B49C5FB030E',
+  [ChainId.WANNSEEMAINNET]: "0x757e5af94fC9b3d4035C2e6Cb1fD304F43c0A1A4",
+  [ChainId.HARDHAT]: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+}
+
+export const ROUTER_ADDRESS = Router_MAP[NETWORK_CHAIN_ID]
 
 
 // a list of tokens by chain
@@ -25,13 +29,13 @@ export const AMPL = new Token(ChainId.MAINNET, '0xD46bA6D942050d489DBd938a2C909A
 
 const WETH_ONLY: ChainTokenList = {
   [ChainId.MAINNET]: [WETH[ChainId.MAINNET]],
-  [ChainId.ROPSTEN]: [WETH[ChainId.ROPSTEN]],
-  [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
-  [ChainId.GÖRLI]: [WETH[ChainId.GÖRLI]],
-  [ChainId.KOVAN]: [WETH[ChainId.KOVAN]],
+  // [ChainId.ROPSTEN]: [WETH[ChainId.ROPSTEN]],
+  // [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
+  // [ChainId.GÖRLI]: [WETH[ChainId.GÖRLI]],
+  // [ChainId.KOVAN]: [WETH[ChainId.KOVAN]],
+  // [ChainId.GANACHE]: [WETH[ChainId.GANACHE]],
   [ChainId.WANNSEE]: [WETH[ChainId.WANNSEE]],
   [ChainId.WANNSEEMAINNET]: [WETH[ChainId.WANNSEEMAINNET]],
-  [ChainId.GANACHE]: [WETH[ChainId.GANACHE]],
   [ChainId.HARDHAT]: [WETH[ChainId.HARDHAT]]
 }
 

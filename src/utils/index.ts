@@ -19,13 +19,13 @@ export function isAddress(value: any): string | false {
 
 const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   1: '',
-  3: 'ropsten.',
-  4: 'rinkeby.',
-  5: 'goerli.',
-  42: 'kovan.',
+  // 3: 'ropsten.',
+  // 4: 'rinkeby.',
+  // 5: 'goerli.',
+  // 42: 'kovan.',
+  // 1337: 'ganache',
   5167003: 'wannsee-explorer.mxc.com',
   18686: 'explorer.mxc.com',
-  1337: 'ganache',
   31337: 'hardhat'
 }
 

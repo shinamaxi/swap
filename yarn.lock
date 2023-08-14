@@ -2575,9 +2575,9 @@
   integrity sha512-2yK7sLpKIT91TiS5sewHtOa7YuM8IuBXVl4GZv2jZFys4D2sY7K5vZh6MqD25TPA95Od+0YzCVq6cTF2IKrOmg==
 
 "@uniswap/sdk@npm:mxcswap-sdk":
-  version "1.0.6"
-  resolved "https://registry.npmjs.org/mxcswap-sdk/-/mxcswap-sdk-1.0.6.tgz#d9747609c9efd4928059bbaaa121c8e0ae3cfee8"
-  integrity sha512-us3I51mwok/VWPuhXf0leQvFimKQhRuSJRliqLxa81K79Ov7Y3l6XjJJueAr0AOnvGZ3VlX4P36JfORlYn9i1g==
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/mxcswap-sdk/-/mxcswap-sdk-1.0.7.tgz#da42f9e0ae52049e6e621c431b253ac42d1d24e4"
+  integrity sha512-yE92U3eqvYD/jEMG1yW+msgcB1UqAW7FUvxBcx6OIK9e36mqnA3czTPMVGkk9ZLXmaf/52MstiwlhaEJzivvPg==
   dependencies:
     "@uniswap/v2-core" "^1.0.0"
     big.js "^5.2.2"
