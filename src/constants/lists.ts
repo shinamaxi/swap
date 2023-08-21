@@ -4,7 +4,7 @@ import { ChainId } from '@uniswap/sdk'
 const NETWORK_CHAIN_ID: ChainId = process.env.REACT_APP_CHAIN_ID ? parseInt(process.env.REACT_APP_CHAIN_ID) : ChainId.WANNSEEMAINNET
 const Router_MAP: { [key in ChainId]: string } = {
   [ChainId.MAINNET]: "https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json",
-  [ChainId.WANNSEE]: 'https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist.json?version=7',
+  [ChainId.WANNSEE]: 'https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist.json?version=8',
   [ChainId.WANNSEEMAINNET]: 'https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist-mainnet.json?version=1',
   [ChainId.HARDHAT]: '',
 }

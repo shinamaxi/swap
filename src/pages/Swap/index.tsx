@@ -45,8 +45,15 @@ import AppBody from '../AppBody'
 import { ClickableText } from '../Pool/styleds'
 import Loader from '../../components/Loader'
 import { SupportButton } from '../../components/SupportButton'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../state'
+import { selectList } from '../../state/lists/actions'
+import { DEFAULT_TOKEN_LIST_URL } from '../../constants/lists'
 
 export default function Swap() {
+  const dispatch = useDispatch<AppDispatch>()
+  dispatch(selectList(DEFAULT_TOKEN_LIST_URL))
+
   const loadedUrlParams = useDefaultsFromURLSearch()
 
   // token warning stuff
