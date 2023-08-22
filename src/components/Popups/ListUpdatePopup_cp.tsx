@@ -1,5 +1,5 @@
-import { TokenList } from '@uniswap/token-lists'
-import React, { useCallback } from 'react'
+import { diffTokenLists, TokenList } from '@uniswap/token-lists'
+import React, { useCallback, useMemo } from 'react'
 import ReactGA from 'react-ga'
 import { useDispatch } from 'react-redux'
 import { Text } from 'rebass'
@@ -40,14 +40,14 @@ export default function ListUpdatePopup({
     removeThisPopup()
   }, [auto, dispatch, listUrl, removeThisPopup])
 
-  // const { added: tokensAdded, changed: tokensChanged, removed: tokensRemoved } = useMemo(() => {
-  //   return diffTokenLists(oldList.tokens, newList.tokens)
-  // }, [newList.tokens, oldList.tokens])
-  // const numTokensChanged = useMemo(
-  //   () =>
-  //     Object.keys(tokensChanged).reduce((memo, chainId: any) => memo + Object.keys(tokensChanged[chainId]).length, 0),
-  //   [tokensChanged]
-  // )
+  const { added: tokensAdded, changed: tokensChanged, removed: tokensRemoved } = useMemo(() => {
+    return diffTokenLists(oldList.tokens, newList.tokens)
+  }, [newList.tokens, oldList.tokens])
+  const numTokensChanged = useMemo(
+    () =>
+      Object.keys(tokensChanged).reduce((memo, chainId: any) => memo + Object.keys(tokensChanged[chainId]).length, 0),
+    [tokensChanged]
+  )
 
   return (
     <AutoRow>
@@ -64,7 +64,7 @@ export default function ListUpdatePopup({
                 An update is available for the token list &quot;{oldList.name}&quot; (
                 {listVersionLabel(oldList.version)} to {listVersionLabel(newList.version)}).
               </Text>
-              {/* <ul>
+              <ul>
                 {tokensAdded.length > 0 ? (
                   <li>
                     {tokensAdded.map((token, i) => (
@@ -88,7 +88,7 @@ export default function ListUpdatePopup({
                   </li>
                 ) : null}
                 {numTokensChanged > 0 ? <li>{numTokensChanged} tokens updated</li> : null}
-              </ul> */}
+              </ul>
             </div>
             <AutoRow>
               <div style={{ flexGrow: 1, marginRight: 12 }}>

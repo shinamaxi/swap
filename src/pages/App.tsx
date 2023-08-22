@@ -22,6 +22,12 @@ import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redir
 import Swap from './Swap'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects'
 
+import { useDarkModeManager } from '../state/user/hooks'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../state'
+import { selectList } from '../state/lists/actions'
+import { DEFAULT_TOKEN_LIST_URL } from '../constants/lists'
+
 const AppWrapper = styled.div`
   display: flex;
   flex-flow: column;
@@ -58,6 +64,12 @@ const Marginer = styled.div`
 `
 
 export default function App() {
+  const dispatch = useDispatch<AppDispatch>()
+  dispatch(selectList(DEFAULT_TOKEN_LIST_URL))
+
+  const [, toggleDarkMode] = useDarkModeManager()
+  toggleDarkMode()
+
   return (
     <Suspense fallback={null}>
       <HashRouter>
