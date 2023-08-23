@@ -107,5 +107,10 @@
       "last 1 safari version"
     ]
   },
-  "license": "GPL-3.0-or-later"
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "classnames": "^2.3.2",
+    "localforage": "^1.10.0",
+    "react-icons": "^4.10.1"
+  }
 }

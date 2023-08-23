@@ -18,6 +18,7 @@ import { StyledInternalLink } from '../../theme'
 import { currencyId } from '../../utils/currencyId'
 import AppBody from '../AppBody'
 import { Dots } from '../Pool/styleds'
+import { useTranslation } from 'react-i18next'
 
 enum Fields {
   TOKEN0 = 0,
@@ -25,6 +26,7 @@ enum Fields {
 }
 
 export default function PoolFinder() {
+  const { t } = useTranslation()
   const { account } = useActiveWeb3React()
 
   const [showSearch, setShowSearch] = useState<boolean>(false)
@@ -129,7 +131,7 @@ export default function PoolFinder() {
             style={{ justifyItems: 'center', backgroundColor: '', padding: '12px 0px', borderRadius: '12px' }}
           >
             <Text textAlign="center" fontWeight={500}>
-              Pool Found!
+              {t('Pool Found')}!
             </Text>
           </ColumnCenter>
         )}
@@ -141,9 +143,9 @@ export default function PoolFinder() {
             ) : (
               <LightCard padding="45px 10px">
                 <AutoColumn gap="sm" justify="center">
-                  <Text textAlign="center">You don’t have liquidity in this pool yet.</Text>
+                  <Text textAlign="center">{t('Youdont have liquidity')}</Text>
                   <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                    <Text textAlign="center">Add liquidity.</Text>
+                    <Text textAlign="center">{t('Add liquidity')}.</Text>
                   </StyledInternalLink>
                 </AutoColumn>
               </LightCard>
@@ -153,7 +155,7 @@ export default function PoolFinder() {
               <AutoColumn gap="sm" justify="center">
                 <Text textAlign="center">No pool found.</Text>
                 <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                  Create pool.
+                  {t('Create pool')}.
                 </StyledInternalLink>
               </AutoColumn>
             </LightCard>
@@ -161,7 +163,7 @@ export default function PoolFinder() {
             <LightCard padding="45px 10px">
               <AutoColumn gap="sm" justify="center">
                 <Text textAlign="center" fontWeight={500}>
-                  Invalid pair.
+                  {t('Invalid pair')}.
                 </Text>
               </AutoColumn>
             </LightCard>

@@ -1,17 +1,27 @@
 import { ChainId } from '@uniswap/sdk'
 
 
+const version = Math.floor(Math.random() * (100 - 1)) + 1
+
 const NETWORK_CHAIN_ID: ChainId = process.env.REACT_APP_CHAIN_ID ? parseInt(process.env.REACT_APP_CHAIN_ID) : ChainId.WANNSEEMAINNET
 const Router_MAP: { [key in ChainId]: string } = {
-  [ChainId.MAINNET]: "https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json",
-  [ChainId.WANNSEE]: 'https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist.json?version=8',
-  [ChainId.WANNSEEMAINNET]: 'https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist-mainnet.json?version=1',
+  [ChainId.MAINNET]: `https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist-mainnet.json?version=${version}`,
+  [ChainId.WANNSEE]: `https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist.json?version=${version}`,
+  [ChainId.WANNSEEMAINNET]: `https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist-mainnet.json?version=${version}`,
+  [ChainId.HARDHAT]: '',
+}
+
+const Info_MAP: { [key in ChainId]: string } = {
+  [ChainId.MAINNET]: `https://uniswap.info`,
+  [ChainId.WANNSEE]: `https://wannsee-swap-info.mxc.com`,
+  [ChainId.WANNSEEMAINNET]: `https://swap-info.mxc.com`,
   [ChainId.HARDHAT]: '',
 }
 
 // the Uniswap Default token list lives here
 // export const DEFAULT_TOKEN_LIST_URL = 'tokens.uniswap.eth'
 export const DEFAULT_TOKEN_LIST_URL = Router_MAP[NETWORK_CHAIN_ID]
+export const INFO_URL = Info_MAP[NETWORK_CHAIN_ID]
 
 // 'https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist.json?version=7'
 // https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json

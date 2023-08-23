@@ -12,6 +12,7 @@ import { AutoRow, RowBetween } from '../Row'
 import { AutoColumn } from '../Column'
 import { AlertTriangle } from 'react-feather'
 import { ButtonError } from '../Button'
+const chainName = process.env.REACT_APP_CHAIN_NAME
 
 const Wrapper = styled.div<{ error: boolean }>`
   background: ${({ theme }) => transparentize(0.6, theme.bg3)};
@@ -74,7 +75,9 @@ function TokenWarningCard({ token }: TokenWarningCardProps) {
           </TYPE.main>
           {chainId && (
             <ExternalLink style={{ fontWeight: 400 }} href={getEtherscanLink(chainId, token.address, 'token')}>
-              <TYPE.blue title={token.address}>{shortenAddress(token.address)} (View on Wannsee Explorer)</TYPE.blue>
+              <TYPE.blue title={token.address}>
+                {shortenAddress(token.address)} (View on {chainName} Explorer)
+              </TYPE.blue>
             </ExternalLink>
           )}
         </AutoColumn>

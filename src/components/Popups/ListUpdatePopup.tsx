@@ -11,6 +11,7 @@ import listVersionLabel from '../../utils/listVersionLabel'
 import { ButtonSecondary } from '../Button'
 import { AutoColumn } from '../Column'
 import { AutoRow } from '../Row'
+import { useTranslation } from 'react-i18next'
 
 export default function ListUpdatePopup({
   popKey,
@@ -25,6 +26,8 @@ export default function ListUpdatePopup({
   newList: TokenList
   auto: boolean
 }) {
+  const { t } = useTranslation()
+
   const removePopup = useRemovePopup()
   const removeThisPopup = useCallback(() => removePopup(popKey), [popKey, removePopup])
   const dispatch = useDispatch<AppDispatch>()
@@ -92,10 +95,10 @@ export default function ListUpdatePopup({
             </div>
             <AutoRow>
               <div style={{ flexGrow: 1, marginRight: 12 }}>
-                <ButtonSecondary onClick={handleAcceptUpdate}>Accept update</ButtonSecondary>
+                <ButtonSecondary onClick={handleAcceptUpdate}>{t('Accept update')}</ButtonSecondary>
               </div>
               <div style={{ flexGrow: 1 }}>
-                <ButtonSecondary onClick={removeThisPopup}>Dismiss</ButtonSecondary>
+                <ButtonSecondary onClick={removeThisPopup}>{t('Dismiss')}</ButtonSecondary>
               </div>
             </AutoRow>
           </>

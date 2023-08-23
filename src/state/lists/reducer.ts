@@ -1,4 +1,4 @@
-import { createReducer } from '@reduxjs/toolkit'
+import { createReducer, createAsyncThunk } from '@reduxjs/toolkit'
 import { getVersionUpgrade, VersionUpgrade } from '@uniswap/token-lists'
 import { TokenList } from '@uniswap/token-lists/dist/types'
 import { DEFAULT_LIST_OF_LISTS, DEFAULT_TOKEN_LIST_URL } from '../../constants/lists'
@@ -29,6 +29,21 @@ const NEW_LIST_STATE: ListsState['byUrl'][string] = {
 
 type Mutable<T> = { -readonly [P in keyof T]: T[P] extends ReadonlyArray<infer U> ? U[] : T[P] }
 
+let defaultList: any = Object.assign({}, UNISWAP_DEFAULT_LIST)
+defaultList.tokens = []
+
+export const fetchDefaultTokenList = createAsyncThunk(
+  'tokenList/fetchDefault',
+  async () => {
+    const response = await fetch(DEFAULT_TOKEN_LIST_URL);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    return data.tokens;
+  }
+);
+
 const initialState: ListsState = {
   lastInitializedDefaultListOfLists: DEFAULT_LIST_OF_LISTS,
   byUrl: {
@@ -38,7 +53,8 @@ const initialState: ListsState = {
     }, {}),
     [DEFAULT_TOKEN_LIST_URL]: {
       error: null,
-      current: UNISWAP_DEFAULT_LIST,
+      // current: UNISWAP_DEFAULT_LIST,
+      current: defaultList,
       loadingRequestId: null,
       pendingUpdate: null
     }

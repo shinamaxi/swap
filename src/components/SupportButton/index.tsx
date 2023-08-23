@@ -1,5 +1,6 @@
 import React, { ButtonHTMLAttributes, useState } from 'react'
 import styled from 'styled-components'
+import { useTranslation } from 'react-i18next'
 
 const showMessageBackgroundColor = '#1568E5'
 const smallButtonBackgroundColor = '#FD3944'
@@ -37,6 +38,7 @@ const StyledButton = styled.button<ButtonHTMLAttributes<HTMLButtonElement> & { s
 `
 
 export function SupportButton() {
+  const { t } = useTranslation()
   const [state, setState] = useState(false)
 
   const handleClick = () => {
@@ -51,7 +53,7 @@ export function SupportButton() {
 
   return (
     <StyledButton showMessage={state} onClick={handleClick}>
-      <span>{state ? 'Need help ?' : '1'}</span>
+      <span>{state ? t('Need help') : '1'}</span>
     </StyledButton>
   )
 }

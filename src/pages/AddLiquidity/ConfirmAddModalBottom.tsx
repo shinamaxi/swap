@@ -6,6 +6,7 @@ import { RowBetween, RowFixed } from '../../components/Row'
 import CurrencyLogo from '../../components/CurrencyLogo'
 import { Field } from '../../state/mint/actions'
 import { TYPE } from '../../theme'
+import { useTranslation } from 'react-i18next'
 
 export function ConfirmAddModalBottom({
   noLiquidity,
@@ -22,6 +23,7 @@ export function ConfirmAddModalBottom({
   poolTokenPercentage?: Percent
   onAdd: () => void
 }) {
+  const { t } = useTranslation()
   return (
     <>
       <RowBetween>
@@ -59,7 +61,7 @@ export function ConfirmAddModalBottom({
       </RowBetween>
       <ButtonPrimary style={{ margin: '20px 0 0 0' }} onClick={onAdd}>
         <Text fontWeight={500} fontSize={20}>
-          {noLiquidity ? 'Create Pool & Supply' : 'Confirm Supply'}
+          {noLiquidity ? t('Create Pool & Supply') : t('Confirm Supply')}
         </Text>
       </ButtonPrimary>
     </>

@@ -1,11 +1,14 @@
 import React, { useRef } from 'react'
-import { Info, BookOpen, Code, PieChart, MessageCircle } from 'react-feather'
+// import { Info, BookOpen, Code, PieChart, MessageCircle } from 'react-feather'
+// import { Info, BookOpen, PieChart } from 'react-feather'
+import { PieChart, Globe } from 'react-feather'
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import useToggle from '../../hooks/useToggle'
 
 import { ExternalLink } from '../../theme'
+import { useTranslation } from 'react-i18next'
 
 const StyledMenuIcon = styled(MenuIcon)`
   path {
@@ -78,13 +81,15 @@ const MenuItem = styled(ExternalLink)`
   }
 `
 
-const CODE_LINK = 'https://github.com/Uniswap/uniswap-interface'
+// const CODE_LINK = 'https://github.com/Uniswap/uniswap-interface'
 
-export default function Menu() {
+export default function Menu(props: any) {
   const node = useRef<HTMLDivElement>()
   const [open, toggle] = useToggle(false)
 
   useOnClickOutside(node, open ? toggle : undefined)
+
+  const { t } = useTranslation()
 
   return (
     // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/30451
@@ -94,29 +99,37 @@ export default function Menu() {
       </StyledMenuButton>
       {open && (
         <MenuFlyout>
-          <MenuItem id="link" href="https://uniswap.org/">
+          {/* <MenuItem id="link" href="https://uniswap.org/">
             <Info size={14} />
             About
-          </MenuItem>
-          <MenuItem id="link" href="https://uniswap.org/docs/v2">
+          </MenuItem> */}
+          {/* <MenuItem id="link" href="https://uniswap.org/docs/v2">
             <BookOpen size={14} />
             Docs
-          </MenuItem>
-          <MenuItem id="link" href={CODE_LINK}>
+          </MenuItem> */}
+          {/* <MenuItem id="link" href={CODE_LINK}>
             <Code size={14} />
             Code
-          </MenuItem>
-          <MenuItem id="link" href="https://discord.gg/EwFs3Pp">
+          </MenuItem> */}
+          {/* <MenuItem id="link" href="https://discord.gg/EwFs3Pp">
             <MessageCircle size={14} />
             Discord
-          </MenuItem>
+          </MenuItem> */}
           {/* <MenuItem id="link" href="https://wannsee-swap-info.mxc.com/">
             <PieChart size={14} />
             Analytics
           </MenuItem> */}
-          <MenuItem id="link" href="https://swap-info.mxc.com/">
+          <div
+            onClick={() => props.setLangVisible(true)}
+            className="flexbox"
+            style={{ paddingLeft: '8px', cursor: 'pointer', margin: '0.5rem 0' }}
+          >
+            <Globe size={14} style={{ marginRight: '8px' }} />
+            {t('Language')}
+          </div>
+          <MenuItem href="https://swap-info.mxc.com/">
             <PieChart size={14} />
-            Analytics
+            {t('Analytics')}
           </MenuItem>
         </MenuFlyout>
       )}

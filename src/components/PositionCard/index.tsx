@@ -20,6 +20,8 @@ import CurrencyLogo from '../CurrencyLogo'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { AutoRow, RowBetween, RowFixed } from '../Row'
 import { Dots } from '../swap/styleds'
+import { INFO_URL } from '../../constants/lists'
+import { useTranslation } from 'react-i18next'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 24px;
@@ -124,6 +126,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
 }
 
 export default function FullPositionCard({ pair, border }: PositionCardProps) {
+  const { t } = useTranslation()
   const { account } = useActiveWeb3React()
 
   const currency0 = unwrappedToken(pair.token0)
@@ -174,7 +177,7 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
             <FixedHeightRow>
               <RowFixed>
                 <Text fontSize={16} fontWeight={500}>
-                  Pooled {currency0.symbol}:
+                  {t('Pooled')} {currency0.symbol}:
                 </Text>
               </RowFixed>
               {token0Deposited ? (
@@ -192,7 +195,7 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
             <FixedHeightRow>
               <RowFixed>
                 <Text fontSize={16} fontWeight={500}>
-                  Pooled {currency1.symbol}:
+                  {t('Pooled')} {currency1.symbol}:
                 </Text>
               </RowFixed>
               {token1Deposited ? (
@@ -208,7 +211,7 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
             </FixedHeightRow>
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-                Your pool tokens:
+                {t('Your pool tokens')}:
               </Text>
               <Text fontSize={16} fontWeight={500}>
                 {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
@@ -216,7 +219,7 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
             </FixedHeightRow>
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-                Your pool share:
+                {t('Your pool tokensYour pool share')}:
               </Text>
               <Text fontSize={16} fontWeight={500}>
                 {poolTokenPercentage ? poolTokenPercentage.toFixed(2) + '%' : '-'}
@@ -224,16 +227,16 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
             </FixedHeightRow>
 
             <AutoRow justify="center" marginTop={'10px'}>
-              <ExternalLink href={`https://uniswap.info/pair/${pair.liquidityToken.address}`}>
-                View pool information ↗
+              <ExternalLink href={`${INFO_URL}/pair/${pair.liquidityToken.address}`}>
+                {t('Your pool tokensYour pool shareView pool information')} ↗
               </ExternalLink>
             </AutoRow>
             <RowBetween marginTop="10px">
               <ButtonSecondary as={Link} to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`} width="48%">
-                Add
+                {t('Add')}
               </ButtonSecondary>
               <ButtonSecondary as={Link} width="48%" to={`/remove/${currencyId(currency0)}/${currencyId(currency1)}`}>
-                Remove
+                {t('Remove')}
               </ButtonSecondary>
             </RowBetween>
           </AutoColumn>

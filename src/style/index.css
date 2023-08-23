@@ -1,3 +1,7 @@
+.divider {
+  border-bottom: 1px solid #ffffff29;
+}
+
 .circle-marker {
   text-align: center;
   line-height: 10px;

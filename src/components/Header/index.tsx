@@ -138,7 +138,7 @@ const NETWORK_LABELS: { [chainId in ChainId]: string | null } = {
   [ChainId.HARDHAT]: 'Hardhat'
 }
 
-export default function Header() {
+export default function Header(props: any) {
   const { account, chainId } = useActiveWeb3React()
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
@@ -178,7 +178,7 @@ export default function Header() {
           <HeaderElementWrap>
             {/* <VersionSwitch /> */}
             <Settings />
-            <Menu />
+            <Menu {...props} />
           </HeaderElementWrap>
         </HeaderControls>
       </RowBetween>
