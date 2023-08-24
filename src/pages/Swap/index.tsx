@@ -46,6 +46,7 @@ import { ClickableText } from '../Pool/styleds'
 import Loader from '../../components/Loader'
 import { SupportButton } from '../../components/SupportButton'
 import { useTranslation } from 'react-i18next'
+import { TAX_TOKEN } from '../../constants/lists'
 
 export default function Swap() {
   const { t } = useTranslation()
@@ -77,7 +78,7 @@ export default function Swap() {
 
   // get custom setting values for user
   const [deadline] = useUserDeadline()
-  const [allowedSlippage] = useUserSlippageTolerance()
+  const [allowedSlippage, setUserSlippageTolerance] = useUserSlippageTolerance()
 
   // swap state
   const { independentField, typedValue, recipient } = useSwapState()
@@ -87,6 +88,18 @@ export default function Swap() {
     currencies[Field.OUTPUT],
     typedValue
   )
+
+  // tax token
+  if (currencies[Field.OUTPUT]) {
+    const outputToken = currencies[Field.OUTPUT] || {}
+    if (TAX_TOKEN.includes((outputToken as any).address) && allowedSlippage !== 320) {
+      setUserSlippageTolerance(320)
+    }
+    if (!TAX_TOKEN.includes((outputToken as any).address) && allowedSlippage !== 50) {
+      setUserSlippageTolerance(50)
+    }
+  }
+
   const showWrap: boolean = wrapType !== WrapType.NOT_APPLICABLE
   const { address: recipientAddress } = useENSAddress(recipient)
   const toggledVersion = useToggledVersion()
@@ -369,7 +382,7 @@ export default function Swap() {
                   {allowedSlippage !== INITIAL_ALLOWED_SLIPPAGE && (
                     <RowBetween align="center">
                       <ClickableText fontWeight={500} fontSize={14} color={theme.text2} onClick={toggleSettings}>
-                        Slippage Tolerance
+                        {t('Slippage tolerance')}
                       </ClickableText>
                       <ClickableText fontWeight={500} fontSize={14} color={theme.text2} onClick={toggleSettings}>
                         {allowedSlippage / 100}%

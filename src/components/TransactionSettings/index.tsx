@@ -152,7 +152,7 @@ export default function SlippageTabs({ rawSlippage, setRawSlippage, deadline, se
       <AutoColumn gap="sm">
         <RowFixed>
           <TYPE.black fontWeight={400} fontSize={14} color={theme.text2}>
-            Slippage tolerance
+            {t('Slippage tolerance')}
           </TYPE.black>
           <QuestionHelper text={t('Your transaction will revert unfavorably')} />
         </RowFixed>

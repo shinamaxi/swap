@@ -18,10 +18,26 @@ const Info_MAP: { [key in ChainId]: string } = {
   [ChainId.HARDHAT]: '',
 }
 
+const TaxToken_MAP: any = {
+  [ChainId.MAINNET]: [],
+  [ChainId.WANNSEE]: [
+    // Crab Token
+    "0xE642170eE88889e3539567C467474e09f10D6e30",
+    // Gin1689 Coin
+    "0x3200b5Aa2C27bd0771F9E1378b175d2729d53402",
+    // Maxis Token
+    "0x1c457428fA7fdE811641688029869a545121C00c"
+  ],
+  [ChainId.WANNSEEMAINNET]: [],
+  [ChainId.HARDHAT]: [],
+}
+
 // the Uniswap Default token list lives here
 // export const DEFAULT_TOKEN_LIST_URL = 'tokens.uniswap.eth'
 export const DEFAULT_TOKEN_LIST_URL = Router_MAP[NETWORK_CHAIN_ID]
 export const INFO_URL = Info_MAP[NETWORK_CHAIN_ID]
+export const TAX_TOKEN = TaxToken_MAP[NETWORK_CHAIN_ID]
+
 
 // 'https://raw.githubusercontent.com/MXCzkEVM/wannseeswap-tokenlist/main/tokenlist.json?version=7'
 // https://raw.githubusercontent.com/compound-finance/token-list/master/compound.tokenlist.json

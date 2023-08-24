@@ -149,5 +149,6 @@
   "Create pool": "Create pool",
   "Invalid pair": "Invalid pair",
   "Language": "Language",
-  "Analytics": "Analytics"
+  "Analytics": "Analytics",
+  "Slippage tolerance": "Slippage Tolerance"
 }
