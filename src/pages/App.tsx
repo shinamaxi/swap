@@ -27,8 +27,8 @@ import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../state'
 import { selectList } from '../state/lists/actions'
 import { DEFAULT_TOKEN_LIST_URL } from '../constants/lists'
-
-import { defaultLocale } from '../lib/i18n'
+import { useTranslation } from 'react-i18next'
+import { defaultLocale } from '../i18nLocal'
 import LanguageModal from '../components/Language'
 
 const AppWrapper = styled.div`
@@ -74,10 +74,7 @@ export default function App() {
   toggleDarkMode()
 
   const [showModal, setShowLangModal] = useState(false)
-  const [currentLanguage, setCurrentLang] = useState(localStorage.getItem('i18nextLng') || defaultLocale)
-  useEffect(() => {
-    setCurrentLang(localStorage.getItem('i18nextLng') || defaultLocale)
-  }, [showModal])
+  const { i18n } = useTranslation()
 
   return (
     <>
@@ -115,7 +112,7 @@ export default function App() {
           </AppWrapper>
         </HashRouter>
       </Suspense>
-      {showModal && <LanguageModal currentLanguage={currentLanguage} setLangVisible={setShowLangModal} />}
+      {showModal && <LanguageModal currentLanguage={(i18n as any).language} setLangVisible={setShowLangModal} />}
     </>
   )
 }

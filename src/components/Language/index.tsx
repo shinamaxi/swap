@@ -1,6 +1,6 @@
 import React from 'react'
 import { X, Check } from 'react-feather'
-import { locales } from '../../lib/i18n'
+import { locales } from '../../i18nLocal'
 import { useTranslation } from 'react-i18next'
 
 export default function LanguageModal(props: any) {
