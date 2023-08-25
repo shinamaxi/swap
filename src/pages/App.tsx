@@ -75,8 +75,6 @@ export default function App() {
   const [showModal, setShowLangModal] = useState(false)
   const { i18n } = useTranslation()
 
-  console.log((i18n as any).language, 999)
-
   return (
     <>
       <Suspense fallback={null}>
