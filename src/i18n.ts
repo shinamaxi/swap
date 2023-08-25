@@ -2,32 +2,7 @@ import i18next from 'i18next'
 import { initReactI18next } from 'react-i18next'
 import XHR from 'i18next-xhr-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
-import { locales } from './i18nLocal'
-
-
-const browserLangToLocaleKey = (lang: any) => {
-  const mapping: any = {
-    'en': 'en',
-    'de': 'de',
-    'nl': 'nl',
-    'tr': 'tr',
-    'zh-CN': 'zh_CN',
-    'zh-TW': 'zh_TW',
-    'ko': 'ko',
-    'ro': 'ro',
-    'es': 'es',
-    'fr': 'fr',
-    'it': 'it',
-    'ja': 'ja',
-    'ru': 'ru',
-    'pt': 'pt',
-    'pt-BR': 'pt',
-    'id': 'id',
-    'vi': 'vi'
-  };
-
-  return mapping[lang] || null;
-};
+import { locales, browserLangToLocaleKey } from './i18nLocal'
 
 const customDetector = {
   name: 'customDetector',
@@ -58,7 +33,7 @@ i18next
     keySeparator: false,
     interpolation: { escapeValue: false },
     detection: {
-      order: ['querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
+      order: ['customDetector', 'querystring', 'cookie', 'localStorage', 'navigator', 'htmlTag'],
       lookupQuerystring: 'lng',
       lookupCookie: 'i18next',
       lookupLocalStorage: 'i18nextLng',
