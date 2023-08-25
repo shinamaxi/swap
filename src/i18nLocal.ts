@@ -1,6 +1,5 @@
 
 
-export const defaultLocale = "en";
 
 export const locales: any = {
     en: "English",

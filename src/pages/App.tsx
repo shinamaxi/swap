@@ -28,7 +28,6 @@ import { AppDispatch } from '../state'
 import { selectList } from '../state/lists/actions'
 import { DEFAULT_TOKEN_LIST_URL } from '../constants/lists'
 import { useTranslation } from 'react-i18next'
-import { defaultLocale } from '../i18nLocal'
 import LanguageModal from '../components/Language'
 
 const AppWrapper = styled.div`

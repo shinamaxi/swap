@@ -4,9 +4,45 @@ import XHR from 'i18next-xhr-backend'
 import LanguageDetector from 'i18next-browser-languagedetector'
 import { locales } from './i18nLocal'
 
+
+const browserLangToLocaleKey = (lang: any) => {
+  const mapping: any = {
+    'en': 'en',
+    'de': 'de',
+    'nl': 'nl',
+    'tr': 'tr',
+    'zh-CN': 'zh_CN',
+    'zh-TW': 'zh_TW',
+    'ko': 'ko',
+    'ro': 'ro',
+    'es': 'es',
+    'fr': 'fr',
+    'it': 'it',
+    'ja': 'ja',
+    'ru': 'ru',
+    'pt': 'pt',
+    'pt-BR': 'pt',
+    'id': 'id',
+    'vi': 'vi'
+  };
+
+  return mapping[lang] || null;
+};
+
+const customDetector = {
+  name: 'customDetector',
+  lookup() {
+    const detectedLang = navigator.language;
+    return browserLangToLocaleKey(detectedLang);
+  }
+};
+
+const languageDetectorCls = new LanguageDetector();
+languageDetectorCls.addDetector(customDetector);
+
 i18next
   .use(XHR)
-  .use(LanguageDetector)
+  .use(languageDetectorCls)
   .use(initReactI18next)
   .init({
     backend: {
@@ -30,7 +66,8 @@ i18next
       lookupFromPathIndex: 0,
       lookupFromSubdomainIndex: 0,
       checkWhitelist: true,
-      checkForSimilarInWhitelist: true, // 启用相似性检查以处理 zh-CN 和 zh_CN 之间的映射
+      // 启用相似性检查以处理 zh-CN 和 zh_CN 之间的映射
+      checkForSimilarInWhitelist: true,
     }
   })
 
