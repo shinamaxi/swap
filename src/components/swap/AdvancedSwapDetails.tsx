@@ -43,7 +43,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
         <RowBetween>
           <RowFixed>
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
-              Price Impact
+              {t('Price Impact')}
             </TYPE.black>
             <QuestionHelper text={t('The difference between the market')} />
           </RowFixed>
@@ -53,7 +53,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
         <RowBetween>
           <RowFixed>
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
-              Liquidity Provider Fee
+              {t('Liquidity Provider Fee')}
             </TYPE.black>
             <QuestionHelper text={t('A portion of each trade')} />
           </RowFixed>

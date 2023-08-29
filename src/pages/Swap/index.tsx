@@ -92,11 +92,11 @@ export default function Swap() {
   // tax token
   if (currencies[Field.OUTPUT]) {
     const outputToken = currencies[Field.OUTPUT] || {}
-    if (TAX_TOKEN.includes((outputToken as any).address) && allowedSlippage !== 320) {
-      setUserSlippageTolerance(320)
-    }
-    if (!TAX_TOKEN.includes((outputToken as any).address) && allowedSlippage !== 50) {
-      setUserSlippageTolerance(50)
+    const inputToken = currencies[Field.INPUT] || {}
+    if (TAX_TOKEN.includes((outputToken as any).address) || TAX_TOKEN.includes((inputToken as any).address)) {
+      if (allowedSlippage <= 300) {
+        setUserSlippageTolerance(350)
+      }
     }
   }
 
@@ -310,7 +310,7 @@ export default function Swap() {
 
           <AutoColumn gap={'md'}>
             <CurrencyInputPanel
-              label={independentField === Field.OUTPUT && !showWrap && trade ? 'From (estimated)' : 'From'}
+              label={independentField === Field.OUTPUT && !showWrap && trade ? `From (${t('estimated')})` : 'From'}
               value={formattedAmounts[Field.INPUT]}
               showMaxButton={!atMaxAmountInput}
               currency={currencies[Field.INPUT]}
@@ -334,7 +334,7 @@ export default function Swap() {
                 </ArrowWrapper>
                 {recipient === null && !showWrap && isExpertMode ? (
                   <LinkStyledButton id="add-recipient-button" onClick={() => onChangeRecipient('')}>
-                    + Add a send (optional)
+                    + {t('Add a send')} ({t('optional')})
                   </LinkStyledButton>
                 ) : null}
               </AutoRow>
@@ -342,7 +342,7 @@ export default function Swap() {
             <CurrencyInputPanel
               value={formattedAmounts[Field.OUTPUT]}
               onUserInput={handleTypeOutput}
-              label={independentField === Field.INPUT && !showWrap && trade ? 'To (estimated)' : 'To'}
+              label={independentField === Field.INPUT && !showWrap && trade ? `To (${t('estimated')})` : 'To'}
               showMaxButton={false}
               currency={currencies[Field.OUTPUT]}
               onCurrencySelect={handleOutputSelect}
@@ -357,7 +357,7 @@ export default function Swap() {
                     <ArrowDown size="16" color={theme.text2} />
                   </ArrowWrapper>
                   <LinkStyledButton id="remove-recipient-button" onClick={() => onChangeRecipient(null)}>
-                    - Remove send
+                    - {t('Remove send')}
                   </LinkStyledButton>
                 </AutoRow>
                 <AddressInputPanel id="recipient" value={recipient} onChange={onChangeRecipient} />
@@ -370,7 +370,7 @@ export default function Swap() {
                   {Boolean(trade) && (
                     <RowBetween align="center">
                       <Text fontWeight={500} fontSize={14} color={theme.text2}>
-                        Price
+                        {t('Price')}
                       </Text>
                       <TradePrice
                         price={trade?.executionPrice}
@@ -403,7 +403,7 @@ export default function Swap() {
               </ButtonPrimary>
             ) : noRoute && userHasSpecifiedInputOutput && swapInputError === undefined ? (
               <GreyCard style={{ textAlign: 'center' }}>
-                <TYPE.main mb="4px">Insufficient liquidity for this trade.</TYPE.main>
+                <TYPE.main mb="4px">{t('Insufficient liquidity for this trade')}</TYPE.main>
               </GreyCard>
             ) : showApproveFlow ? (
               <RowBetween>
@@ -419,9 +419,9 @@ export default function Swap() {
                       Approving <Loader stroke="white" />
                     </AutoRow>
                   ) : approvalSubmitted && approval === ApprovalState.APPROVED ? (
-                    'Approved'
+                    t('Approved')
                   ) : (
-                    'Approve ' + currencies[Field.INPUT]?.symbol
+                    `${t('Approve')} ` + currencies[Field.INPUT]?.symbol
                   )}
                 </ButtonConfirmed>
                 <ButtonError
@@ -447,8 +447,8 @@ export default function Swap() {
                 >
                   <Text fontSize={16} fontWeight={500}>
                     {priceImpactSeverity > 3 && !isExpertMode
-                      ? `Price Impact High`
-                      : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
+                      ? t('Price Impact High')
+                      : `${priceImpactSeverity > 2 ? t('swapAnyway') : t('Swap')}`}
                   </Text>
                 </ButtonError>
               </RowBetween>
@@ -475,8 +475,8 @@ export default function Swap() {
                   {swapInputError
                     ? swapInputError
                     : priceImpactSeverity > 3 && !isExpertMode
-                    ? `Price Impact Too High`
-                    : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
+                    ? t('Price Impact Too High')
+                    : `${priceImpactSeverity > 2 ? t('swapAnyway') : t('Swap')}`}
                 </Text>
               </ButtonError>
             )}

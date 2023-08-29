@@ -161,7 +161,7 @@ export function useDerivedSwapInfo(): {
   }
 
   if (!currencies[Field.INPUT] || !currencies[Field.OUTPUT]) {
-    inputError = inputError ?? 'Select a token'
+    inputError = inputError ?? i18n.t('selectToken')
   }
 
   if (
@@ -176,14 +176,14 @@ export function useDerivedSwapInfo(): {
 
   const formattedTo = isAddress(to)
   if (!to || !formattedTo) {
-    inputError = inputError ?? 'Enter a recipient'
+    inputError = inputError ?? i18n.t('Enter a recipient')
   } else {
     if (
       BAD_RECIPIENT_ADDRESSES.indexOf(formattedTo) !== -1 ||
       (bestTradeExactIn && involvesAddress(bestTradeExactIn, formattedTo)) ||
       (bestTradeExactOut && involvesAddress(bestTradeExactOut, formattedTo))
     ) {
-      inputError = inputError ?? 'Invalid recipient'
+      inputError = inputError ?? i18n.t('Invalid recipient')
     }
   }
 
@@ -198,7 +198,8 @@ export function useDerivedSwapInfo(): {
   ]
 
   if (balanceIn && amountIn && balanceIn.lessThan(amountIn)) {
-    inputError = 'Insufficient ' + amountIn.currency.symbol + ' balance'
+    // inputError = 'Insufficient ' + amountIn.currency.symbol + ' balance'
+    inputError = `${i18n.t("Insufficient")} ` + amountIn.currency.symbol + ` ${i18n.t("balanceText")}`
   }
 
   return {

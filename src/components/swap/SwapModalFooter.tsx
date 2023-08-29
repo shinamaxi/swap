@@ -119,7 +119,7 @@ export default function SwapModalFooter({
           id="confirm-swap-or-send"
         >
           <Text fontSize={20} fontWeight={500}>
-            {severity > 2 ? t('Swap Anyway') : t('Confirm Swap')}
+            {severity > 2 ? t('swapAnyway') : t('Confirm Swap')}
           </Text>
         </ButtonError>
 

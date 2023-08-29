@@ -75,7 +75,7 @@ export default function Pool() {
               <Text color={theme.text1} fontWeight={500}>
                 {t('Your Liquidity')}
               </Text>
-              <Question text="When you add liquidity, you are given pool tokens that represent your share. If you don’t see a pool you joined in this list, try importing a pool below." />
+              <Question text={t('When you add liquidity importing')} />
             </RowBetween>
 
             {!account ? (
@@ -108,7 +108,7 @@ export default function Pool() {
               <Text textAlign="center" fontSize={14} style={{ padding: '.5rem 0 .5rem 0' }}>
                 {hasV1Liquidity ? 'Uniswap V1 liquidity found!' : t('Dont pool you joined')}{' '}
                 <StyledInternalLink id="import-pool-link" to={hasV1Liquidity ? '/migrate/v1' : '/find'}>
-                  {hasV1Liquidity ? 'Migrate now.' : 'Import it.'}
+                  {hasV1Liquidity ? 'Migrate now.' : `${t('Import it')}.`}
                 </StyledInternalLink>
               </Text>
             </div>
