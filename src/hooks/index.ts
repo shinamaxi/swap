@@ -24,13 +24,15 @@ export function useEagerConnect() {
           setTried(true)
         })
       } else {
-        if (isMobile && window.ethereum) {
-          activate(injected, undefined, true).catch(() => {
-            setTried(true)
-          })
-        } else {
-          setTried(true)
-        }
+        // if (isMobile && window.ethereum) {
+        //   activate(injected, undefined, true).catch(() => {
+        //     setTried(true)
+        //   })
+        // } else {
+        //   setTried(true)
+        // }
+        setTried(true)
+        activate(injected, undefined, true)
       }
     })
   }, [activate]) // intentionally only running on mount (make sure it's only mounted once :))

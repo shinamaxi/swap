@@ -28,9 +28,18 @@ const TaxToken_MAP: any = {
     // Maxis Token
     "0x1c457428fA7fdE811641688029869a545121C00c"
   ],
-  [ChainId.WANNSEEMAINNET]: [],
+  [ChainId.WANNSEEMAINNET]: [
+    // Crab Token
+    "0x432DA7aC74e83417d4c683ff283bBB8F7E8B09b8",
+    // Gin1689 Coin
+    "0xC7e0C30915aC225e4804AaEFC0707795B26C9108",
+    // Maxis Token
+    "0x7eB14d2cF852aD5E20dd46Af3D2ddA87A1E67bAf"
+  ],
   [ChainId.HARDHAT]: [],
 }
+
+
 
 // the Uniswap Default token list lives here
 // export const DEFAULT_TOKEN_LIST_URL = 'tokens.uniswap.eth'

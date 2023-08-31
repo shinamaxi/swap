@@ -9,6 +9,7 @@ import useToggle from '../../hooks/useToggle'
 
 import { ExternalLink } from '../../theme'
 import { useTranslation } from 'react-i18next'
+import { INFO_URL } from '../../constants/lists'
 
 const StyledMenuIcon = styled(MenuIcon)`
   path {
@@ -127,7 +128,7 @@ export default function Menu(props: any) {
             <Globe size={14} style={{ marginRight: '8px' }} />
             {t('Language')}
           </div>
-          <MenuItem href="https://swap-info.mxc.com/">
+          <MenuItem href={INFO_URL}>
             <PieChart size={14} />
             {t('Analytics')}
           </MenuItem>
