@@ -93,8 +93,8 @@ export interface WalletInfo {
 export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   INJECTED: {
     connector: injected,
-    name: 'Injected',
-    iconName: 'arrow-right.svg',
+    name: 'AXS Wallet',
+    iconName: 'axs-wallect.jpg',
     description: 'Injected web3 provider.',
     href: null,
     color: '#010101',
