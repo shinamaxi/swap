@@ -24,7 +24,7 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   // 5: 'goerli.',
   // 42: 'kovan.',
   // 1337: 'ganache',
-  534849: 'shinascan.shinarium.org'
+  534849: 'shinascan.shinarium.org',
   214: 'blockscout.shinarium.org',
   31337: 'hardhat'
 }
