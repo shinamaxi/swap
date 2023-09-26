@@ -24,8 +24,8 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   // 5: 'goerli.',
   // 42: 'kovan.',
   // 1337: 'ganache',
-  5167003: 'wannsee-explorer.mxc.com',
-  18686: 'explorer.mxc.com',
+  534849: 'shinascan.shinarium.org'
+  214: 'blockscout.shinarium.org',
   31337: 'hardhat'
 }
 
